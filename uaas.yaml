@@ -1,0 +1,135 @@
+swagger: "2.0"
+
+info:
+  version: "1.0"
+  title: "UAAS"
+  description: "Umarell as a service"
+
+host: "[YOUR_PROJECT_ID].appspot.com"
+basePath: "/api/v1"
+
+schemes:
+  - https
+
+paths:
+  /clean:
+    get:
+      description: "Clean the database"
+      responses:
+        200: 
+          description: "Ok"
+          
+  /cantiere/{idcantiere}/:
+    parameters:
+      - name: idcantiere
+        in: path
+        required: true
+        description: "Id del cantiere"
+        type: integer
+    post:
+      description: "Aggiungi nuovo cantiere"
+      operationId: "PostCantiere"
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: cantiere
+          required: True
+          description: "Dettagli cantiere"
+          schema:
+            $ref: "#/definitions/Cantiere"
+      responses:
+        201:
+          description: "Success"
+          schema:
+            $ref: '#/definitions/Cantiere'
+        400:
+          description: "Generic error"
+        409:
+          description: "Conflict"
+    get:
+      description: "Recupera Cantiere"
+      operationId: "GetCantiere"
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/Cantiere"
+        404:
+          description: "Not found"
+
+  /umarell/{idumarell}/:
+    parameters:
+      - name: idumarell
+        in: path
+        required: true
+        description: "Id dell'Umarell"
+        type: integer
+    post:
+      description: "Aggiungi nuovo Umarell"
+      operationId: "PostUmarell"
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: umarell
+          required: True
+          description: "Dettagli Umarell"
+          schema:
+            $ref: "#/definitions/Umarell"
+      responses:
+        201:
+          description: "Success"
+          schema:
+            $ref: '#/definitions/Umarell'
+        400:
+          description: "Generic error"
+        409:
+          description: "Conflict"
+    get:
+      description: "Recupera Umarell"
+      operationId: "GetUmarell"
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/Umarell"
+        404:
+          description: "Not found"
+
+definitions:
+  Cantiere:
+    type: object
+    required:
+      - indirizzo
+      - cap
+    properties:
+      indirizzo:
+        type: string
+      cap:
+        type: integer
+        minimum: 0
+        maximum: 99999
+    example:
+      indirizzo: 'Via Vivarelli 10' 
+      cap: 41125
+
+  Umarell:
+    type: object
+    required:
+      - nome
+      - cognome
+      - cap
+    properties:
+      nome:
+        type: string
+      cognome:
+        type: string
+      cap:
+        type: integer
+        minimum: 0
+        maximum: 99999
+    example:
+      nome: 'Walter' 
+      cognome: 'Ometti' 
+      cap: 41125

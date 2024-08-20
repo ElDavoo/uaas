@@ -1,0 +1,9 @@
+GET http://localhost:5000/api/v1/clean
+###
+POST http://localhost:5000/api/v1/cantiere/2
+Content-Type: application/json
+
+{
+  "indirizzo": "Via Vivarelli 10",
+  "cap": 41925
+}

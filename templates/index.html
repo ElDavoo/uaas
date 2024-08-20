@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>UaaS</title>
+</head>
+<body>
+    <form method="POST">
+        <table>
+            <tr>
+                <td>CAP:</td>
+                <td>{{form.cap}}</td>
+                <td>Cantieri?</td>
+                <td>{{ form.cantieri }}</td>
+                <td>Umarell?</td>
+                <td>{{ form.umarell }}</td>
+                <td><input type="submit" value="Cerca"></td>
+            </tr>
+        </table>
+    </form>
+    <table id="data" class="table table-striped is-fullwidth">
+
+        <tbody>
+        {% for result in results %}
+            <tr bgcolor="#f5f5f5">
+                <td>{{ result }}</td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+
+
+    </table>
+
+
+</body>
+</html>
